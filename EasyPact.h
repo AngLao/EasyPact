@@ -16,29 +16,28 @@ typedef unsigned int        uint32_t;
 extern uint8_t REC_HEADER ;
 extern uint8_t check_model ;
 extern uint8_t transfer_model ;
-//Ğ£Ñé·½·¨Ñ¡Ôñ
+//æ ¡éªŒæ–¹æ³•é€‰æ‹©
 #define sum_model 					0
 #define crc16_model                 1
 #define niming_model                2
 
-//Êı¾İ´«ÊäÄ£Ê½Ñ¡Ôñ   µÍÎ»ÏÈ³ö? ¸ßÎ»ÏÈ³ö?
+//æ•°æ®ä¼ è¾“æ¨¡å¼é€‰æ‹©   ä½ä½å…ˆå‡º? é«˜ä½å…ˆå‡º?
 #define low_first_out               1
 #define high_first_out              2
 
 
-//----------·¢ËÍ·½·½·¨ÉùÃ÷----------
+//----------å‘é€æ–¹æ–¹æ³•å£°æ˜----------
 typedef struct {
-    uint8_t header;         // Ö¡Í·
-    uint8_t address;        // µØÖ·
+    uint8_t header;         // å¸§å¤´
+    uint8_t address;        // åœ°å€
     uint8_t id;             // ID
-    uint8_t data_length;    // Êı¾İ³¤¶È
-    uint16_t check;         // Ö¡Ğ£Ñé
-
-    uint8_t data[MAX_DATA_LENGTH];  // Êı¾İ
+    uint8_t data_length;    // æ•°æ®é•¿åº¦
+    uint8_t data[MAX_DATA_LENGTH];  // æ•°æ®
+    // å¸§æ ¡éªŒæ·»åŠ åˆ°æ•°æ®æœ«å°¾
 } frame_t;
 
 
-//³éÏó²ã·½·¨
+//æŠ½è±¡å±‚æ–¹æ³•
 void easy_wipe_data(frame_t *p_Frame);
 void easy_set_id(frame_t *p_Frame, uint8_t id);
 void easy_set_header(frame_t *p_Frame, uint8_t header);
@@ -46,13 +45,13 @@ void easy_set_address(frame_t *p_Frame, uint8_t address);
 uint8_t easy_add_check(frame_t *p_Frame);
 uint8_t easy_add_data(frame_t *p_Frame, uint32_t data, uint8_t length);
 
-//----------Ğ£Ñé·½·¨ÉùÃ÷----------
+//----------æ ¡éªŒæ–¹æ³•å£°æ˜----------
 uint16_t calculate_check(frame_t *p_Frame, uint8_t length);
 uint16_t calculate_sum(frame_t *p_Frame, uint8_t length) ;
 uint16_t calculate_crc(frame_t *p_Frame, uint8_t length);
 
 
-//----------½ÓÊÕ·½·½·¨ÉùÃ÷----------
+//----------æ¥æ”¶æ–¹æ–¹æ³•å£°æ˜----------
 typedef enum {
     HEADER = 0,
     ADDRESS,
@@ -65,7 +64,7 @@ typedef enum {
 
 uint8_t  easy_return_buflen(frame_t* p_Frame);
 uint16_t easy_return_name(frame_t* p_Frame);
-uint8_t  easy_parse_data(const uint8_t new_data, frame_t* frame);
+uint8_t easy_parse_data(frame_t** frame,const uint8_t new_data);
 
 
 #ifdef __cplusplus

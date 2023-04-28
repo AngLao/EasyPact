@@ -14,3 +14,5 @@
         easy_add_data(&senbuf, data3, 1);
         easy_add_check(&senbuf);
 }
+
+//移除硬件层,解析完成后传出一个uint8_t指向数据存放地址的指针
